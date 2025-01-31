@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListComponent } from './list/list.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { SharedModule } from '../shared/shared.module';
+import { ResponseListComponent } from './response-list/response-list.component';
 
 const routes: Routes = [
   {
@@ -15,12 +16,16 @@ const routes: Routes = [
         path: '',
         component: ListComponent,
       },
+      {
+        path: 'responses/:formId',
+        component: ResponseListComponent,
+      },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [FormsComponent, ListComponent],
+  declarations: [FormsComponent, ListComponent, ResponseListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

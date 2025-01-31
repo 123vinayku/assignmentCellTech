@@ -65,3 +65,31 @@
     }
   }
 }
+
+.link {
+  margin-left: 5px;
+  border-color: $primary;
+  i {
+    color: $primary;
+  }
+  &:hover {
+    background-color: $primary;
+    i {
+      color: $white;
+    }
+  }
+}
+
+.responses {
+  margin-left: 5px;
+  border-color: $warning;
+  i {
+    color: $warning;
+  }
+  &:hover {
+    background-color: $warning;
+    i {
+      color: $white;
+    }
+  }
+}

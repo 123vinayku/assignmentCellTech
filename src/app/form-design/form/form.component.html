@@ -1,0 +1,43 @@
+<div class="container" [formGroup]="webForm">
+  <div class="header flex flexRow justifyContentBetween">
+    <h4>{{ responseId ? "Response" : "Fill" }} {{ formDetails.name }}</h4>
+    <button
+      title="Submit"
+      type="submit"
+      [disabled]="webForm.invalid"
+      class="btn btn-primary"
+      (click)="onSubmit()"
+      *ngIf="!responseId"
+    >
+      Submit
+    </button>
+  </div>
+  <ng-container *ngFor="let field of formDetails.fields; let i = index">
+    <ng-container [ngSwitch]="field.type">
+      <ng-container *ngSwitchCase="fieldTypeEnum.TEXT">
+        <app-text-input
+          [mode]="responseId ? formsModeEnum.PREVIEW : formsModeEnum.SUBMIT"
+          [field]="field"
+          [editIndex]="i"
+          [control]="webForm.get(field.key)"
+        ></app-text-input>
+      </ng-container>
+      <ng-container *ngSwitchCase="fieldTypeEnum.RADIO">
+        <app-radio
+          [mode]="responseId ? formsModeEnum.PREVIEW : formsModeEnum.SUBMIT"
+          [field]="field"
+          [editIndex]="i"
+          [control]="webForm.get(field.key)"
+        ></app-radio>
+      </ng-container>
+      <ng-container *ngSwitchCase="fieldTypeEnum.CHECKBOX">
+        <app-checkbox
+          [mode]="responseId ? formsModeEnum.PREVIEW : formsModeEnum.SUBMIT"
+          [field]="field"
+          [editIndex]="i"
+          [control]="webForm.get(field.key)"
+        ></app-checkbox>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

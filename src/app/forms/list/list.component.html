@@ -29,6 +29,21 @@
           <button title="Edit" class="btn edit" (click)="onEdit(form)">
             <i class="bi bi-pencil-square"></i>
           </button>
+          <button
+            title="Open"
+            [disabled]="!form.fields.length"
+            class="btn link"
+            (click)="onOpen(form)"
+          >
+            <i class="bi bi-box-arrow-up-right"></i>
+          </button>
+          <button
+            title="Responses"
+            class="btn responses"
+            (click)="onOpenResponses(form)"
+          >
+            <i class="bi bi-file-earmark-check"></i>
+          </button>
         </td>
       </tr>
     </tbody>

@@ -11,6 +11,7 @@ import { FormFieldRequired } from '../constants';
 import {
   FormFieldRequiredEnum,
   FormsModeEnum,
+  IFormFieldOptions,
   IFormFieldRequired,
 } from '../types';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
@@ -37,7 +38,9 @@ export class CheckboxComponent implements OnInit, OnChanges {
 
   constructor(public formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.control, 'control');
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.disableInput();
@@ -63,7 +66,6 @@ export class CheckboxComponent implements OnInit, OnChanges {
   }
 
   onCheckboxChange(event: any) {
-    console.log(event);
     const selectedValues = this.control as FormArray;
     if (event.target.checked) {
       selectedValues.push(this.formBuilder.control(event.target.value)); // Add value if checked

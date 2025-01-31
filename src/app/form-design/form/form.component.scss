@@ -1,0 +1,11 @@
+@import "../../../theme/variable.scss";
+@import "../../../theme/flexBox.scss";
+
+.header {
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $lightGrey;
+  h4 {
+    font-family: $fontFamily;
+  }
+}

@@ -6,13 +6,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './text-input/text-input.component';
 import { RadioComponent } from './radio/radio.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
-import { PreviewComponent } from './preview/preview.component';
 import { SharedModule } from '../shared/shared.module';
+import { PreviewComponent } from './preview/preview.component';
+import { FormComponent } from './form/form.component';
 
 const routes: Routes = [
   {
     path: '',
     component: FormDesignComponent,
+  },
+  {
+    path: 'form/:id',
+    component: FormComponent,
+  },
+  {
+    path: 'form/view/:id/:responseId',
+    component: FormComponent,
   },
 ];
 
@@ -23,6 +32,7 @@ const routes: Routes = [
     RadioComponent,
     CheckboxComponent,
     PreviewComponent,
+    FormComponent,
   ],
   imports: [
     CommonModule,

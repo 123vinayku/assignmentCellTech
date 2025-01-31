@@ -35,6 +35,7 @@ export interface IFormField {
 export enum FormsModeEnum {
   EDIT = 'edit',
   PREVIEW = 'preview',
+  SUBMIT = 'submit',
 }
 
 export interface IForm {
@@ -45,4 +46,12 @@ export interface IForm {
 
 export enum FormStorageKeys {
   FORMS = 'forms',
+  RESPONSES = 'responses',
+}
+
+export interface IResponse {
+  id: number;
+  formId: number;
+  submittedAt: string;
+  formValues: { [key: string]: any };
 }

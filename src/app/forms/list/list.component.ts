@@ -49,4 +49,12 @@ export class ListComponent implements OnInit {
   onEdit(form: IForm) {
     this.router.navigate(['form-design/edit/', form.id]);
   }
+
+  onOpen(form: IForm) {
+    this.router.navigate(['form-design/form/', form.id]);
+  }
+
+  onOpenResponses(form: IForm) {
+    this.router.navigate(['forms/responses/', form.id]);
+  }
 }
