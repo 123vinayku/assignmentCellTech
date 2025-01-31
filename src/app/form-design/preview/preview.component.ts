@@ -35,9 +35,7 @@ export class PreviewComponent implements OnInit, OnChanges {
 
   constructor(public formBuilder: FormBuilder) {}
 
-  ngOnInit(): void {
-    this.initForm();
-  }
+  ngOnInit(): void {}
 
   ngOnChanges(changes: SimpleChanges): void {
     this.initForm();
@@ -69,6 +67,5 @@ export class PreviewComponent implements OnInit, OnChanges {
         );
       }
     }
-    console.log(this.formPreview, 'ppp');
   }
 }

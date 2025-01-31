@@ -18,6 +18,13 @@ const routes: Routes = [
         (m) => m.FormDesignModule
       ),
   },
+  {
+    path: 'form-design/edit/:id',
+    loadChildren: () =>
+      import('./form-design/form-design.module').then(
+        (m) => m.FormDesignModule
+      ),
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home' },
 ];

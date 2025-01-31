@@ -1,6 +1,6 @@
 <div class="formDesign">
   <div class="header">
-    <h4>Create Form</h4>
+    <h4>{{ formId ? "Update" : "Create" }} Form</h4>
   </div>
   <div [formGroup]="form" class="formDetails flex flexRow">
     <div>
@@ -28,9 +28,9 @@
         [disabled]="form.invalid"
         title="Submit"
         class="btn btn-primary"
-        (click)="onSubmit()"
+        (click)="!formId ? onSubmit() : onUpdate()"
       >
-        Submit
+        {{ formId ? "Update" : "Submit" }}
       </button>
     </div>
   </div>

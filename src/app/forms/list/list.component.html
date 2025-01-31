@@ -21,16 +21,21 @@
         <td>
           {{ form.name }}
         </td>
-        <td>{{ form.fieldsCount }}</td>
+        <td>{{ form.fields.length }}</td>
         <td>
-          <button title="Delete" class="btn delete" (click)="onDelete()">
+          <button title="Delete" class="btn delete" (click)="onDelete(form)">
             <i class="bi bi-trash"></i>
           </button>
-          <button title="Edit" class="btn edit">
+          <button title="Edit" class="btn edit" (click)="onEdit(form)">
             <i class="bi bi-pencil-square"></i>
           </button>
         </td>
       </tr>
     </tbody>
+    <tfoot *ngIf="!forms?.length">
+      <tr>
+        <td colspan="4" class="textCenter">No Data Found.</td>
+      </tr>
+    </tfoot>
   </table>
 </div>

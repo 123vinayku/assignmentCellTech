@@ -42,3 +42,7 @@ export interface IForm {
   name: string;
   fields: Array<IFormField>;
 }
+
+export enum FormStorageKeys {
+  FORMS = 'forms',
+}
