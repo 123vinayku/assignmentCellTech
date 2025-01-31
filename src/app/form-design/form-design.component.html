@@ -61,32 +61,6 @@
             </div>
           </div>
         </div>
-        <div class="control ml-10">
-          <label>Is Field Required?</label>
-          <select class="form-control" formControlName="isRequired">
-            <option value="" selected>Select Field Required</option>
-            <option
-              *ngFor="let fieldRequired of formFieldRequired"
-              value="{{ fieldRequired.value }}"
-            >
-              {{ fieldRequired.label }}
-            </option>
-          </select>
-          <div
-            *ngIf="
-              addFieldForm.controls['isRequired'].invalid &&
-              (addFieldForm.controls['isRequired'].dirty ||
-                addFieldForm.controls['isRequired'].touched)
-            "
-            class="error"
-          >
-            <div
-              *ngIf="addFieldForm.controls['isRequired'].errors?.['required']"
-            >
-              This field is required.
-            </div>
-          </div>
-        </div>
         <div class="btnControl">
           <label style="visibility: hidden">Add More</label>
           <button
@@ -101,24 +75,39 @@
         </div>
       </div>
 
-      <div [formGroup]="form">
-        <div formArrayName="fields">
+      <div class="mt-10" [formGroup]="form">
+        <ng-container formArrayName="fields">
           <ng-container *ngFor="let field of fields.controls; let i = index">
-            <div [formGroupName]="i">
+            <ng-container [formGroupName]="i">
               <ng-container [ngSwitch]="field.get('type')?.value">
                 <ng-container *ngSwitchCase="fieldTypeEnum.TEXT">
-                  Text
+                  <app-text-input
+                    [editMode]="true"
+                    [field]="field"
+                    [editIndex]="i"
+                    (onDelete)="onDeleteField($event)"
+                  ></app-text-input>
                 </ng-container>
                 <ng-container *ngSwitchCase="fieldTypeEnum.RADIO">
-                  Radio
+                  <app-radio
+                    [editMode]="true"
+                    [field]="field"
+                    [editIndex]="i"
+                    (onDelete)="onDeleteField($event)"
+                  ></app-radio>
                 </ng-container>
                 <ng-container *ngSwitchCase="fieldTypeEnum.CHECKBOX">
-                  Check
+                  <app-checkbox
+                    [editMode]="true"
+                    [field]="field"
+                    [editIndex]="i"
+                    (onDelete)="onDeleteField($event)"
+                  ></app-checkbox>
                 </ng-container>
               </ng-container>
-            </div>
+            </ng-container>
           </ng-container>
-        </div>
+        </ng-container>
       </div>
     </div>
     <div class="preview"></div>

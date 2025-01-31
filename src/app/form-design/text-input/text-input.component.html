@@ -1,1 +1,74 @@
-<p>text-input works!</p>
+<ng-container *ngIf="editMode; else nonEdit">
+  <div class="edit" [formGroup]="field">
+    <div class="header flex flexRow justifyContentBetween">
+      <div></div>
+      <div class="deleteCt">
+        <button
+          title="Delete"
+          class="btn delete"
+          type="button"
+          (click)="onDelete.emit(editIndex)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+    <div class="flex flexRow flexWrap">
+      <div class="control">
+        <label>Label</label>
+        <input
+          placeholder="Enter Label"
+          class="form-control"
+          formControlName="label"
+        />
+        <div
+          *ngIf="
+            field.controls['label'].invalid &&
+            (field.controls['label'].dirty || field.controls['label'].touched)
+          "
+          class="error"
+        >
+          <div *ngIf="field.controls['label'].errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+      <div class="control ml-10">
+        <label>Is Field Required?</label>
+        <select class="form-control" formControlName="isRequired">
+          <option value="" selected>Select Field Required</option>
+          <option
+            *ngFor="let fieldRequired of formFieldRequired"
+            value="{{ fieldRequired.value }}"
+          >
+            {{ fieldRequired.label }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            field.controls['isRequired'].invalid &&
+            (field.controls['isRequired'].dirty ||
+              field.controls['isRequired'].touched)
+          "
+          class="error"
+        >
+          <div *ngIf="field.controls['isRequired'].errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+      <div class="control">
+        <label>Placeholder</label>
+        <input
+          placeholder="Enter Placeholder"
+          class="form-control"
+          formControlName="placeholder"
+        />
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #nonEdit>
+  <div class="nonEdit"></div>
+</ng-template>

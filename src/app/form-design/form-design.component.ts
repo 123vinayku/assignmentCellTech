@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  FormFieldsTypeEnum,
-  IFormFieldRequired,
-  IFormFieldType,
-} from './types';
-import { FormFieldRequired, FormFieldTypes } from './constants';
+import { FormFieldsTypeEnum, IFormFieldType } from './types';
+import { FormFieldTypes } from './constants';
 
 @Component({
   selector: 'app-form-design',
@@ -17,7 +13,6 @@ export class FormDesignComponent implements OnInit {
   public form!: FormGroup;
   public addFieldForm!: FormGroup;
   public formFields: Array<IFormFieldType> = FormFieldTypes;
-  public formFieldRequired: Array<IFormFieldRequired> = FormFieldRequired;
   public fieldTypeEnum = FormFieldsTypeEnum;
 
   get fields(): FormArray {
@@ -41,19 +36,16 @@ export class FormDesignComponent implements OnInit {
   initAddFieldForm() {
     this.addFieldForm = this.formBuilder.group({
       type: ['', Validators.required],
-      isRequired: ['', Validators.required],
     });
   }
 
   onNewField() {
     return this.formBuilder.group({
       type: [this.addFieldForm.controls['type'].value, Validators.required],
-      isRequired: [
-        this.addFieldForm.controls['isRequired'].value,
-        Validators.required,
-      ],
+      isRequired: ['', Validators.required],
       label: ['', Validators.required],
       placeholder: [''],
+      options: this.formBuilder.array([]),
     });
   }
 
@@ -62,6 +54,10 @@ export class FormDesignComponent implements OnInit {
     this.addFieldForm.reset();
     this.initAddFieldForm();
     console.log(this.form);
+  }
+
+  onDeleteField(index: number) {
+    this.fields.removeAt(index);
   }
 
   onSubmit() {}

@@ -1,0 +1,59 @@
+@import "../../../theme/variable.scss";
+@import "../../../theme/flexBox.scss";
+
+.edit {
+  padding: 10px;
+  border: 1px dotted $lightGrey;
+  border-radius: 4;
+  margin-bottom: 10px;
+  .header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $lightGrey;
+  }
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .form-control {
+    font-size: 14px;
+  }
+  .control {
+    flex: 0 1 48%;
+  }
+  .btn {
+    padding: 5px 8px;
+    border-radius: 4px;
+    border-width: 1px;
+    border-style: solid;
+    transition: all 100ms linear;
+    font-size: 14px;
+    font-family: $fontFamily;
+    i {
+      transition: all 100ms linear;
+    }
+  }
+
+  .delete {
+    border-color: $danger;
+    i {
+      color: $danger;
+    }
+    &:hover {
+      background-color: $danger;
+      i {
+        color: $white;
+      }
+    }
+  }
+}
+
+.nonEdit {
+}
+
+.error {
+  font-family: $fontFamily;
+  font-size: 12px;
+  color: $danger;
+  margin: 4px 0;
+}

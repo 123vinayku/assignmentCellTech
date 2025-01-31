@@ -1,1 +1,141 @@
-<p>checkbox works!</p>
+<ng-container *ngIf="editMode; else nonEdit">
+  <div class="edit" [formGroup]="field">
+    <div class="header flex flexRow justifyContentBetween">
+      <div></div>
+      <div class="deleteCt">
+        <button
+          title="Delete"
+          class="btn delete"
+          type="button"
+          (click)="onDelete.emit(editIndex)"
+        >
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </div>
+    <div class="flex flexRow flexWrap">
+      <div class="control">
+        <label>Label</label>
+        <input
+          placeholder="Enter Label"
+          class="form-control"
+          formControlName="label"
+        />
+        <div
+          *ngIf="
+            field.controls['label'].invalid &&
+            (field.controls['label'].dirty || field.controls['label'].touched)
+          "
+          class="error"
+        >
+          <div *ngIf="field.controls['label'].errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+      <div class="control ml-10">
+        <label>Is Field Required?</label>
+        <select class="form-control" formControlName="isRequired">
+          <option value="" selected>Select Field Required</option>
+          <option
+            *ngFor="let fieldRequired of formFieldRequired"
+            value="{{ fieldRequired.value }}"
+          >
+            {{ fieldRequired.label }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            field.controls['isRequired'].invalid &&
+            (field.controls['isRequired'].dirty ||
+              field.controls['isRequired'].touched)
+          "
+          class="error"
+        >
+          <div *ngIf="field.controls['isRequired'].errors?.['required']">
+            This field is required.
+          </div>
+        </div>
+      </div>
+      <div class="full-control mt-10">
+        <div
+          class="flex flexRow justifyContentBetween alignItemCenter optHeading"
+        >
+          <label>Add Options</label>
+          <button
+            type="button"
+            class="btn btn-outline-primary"
+            (click)="onAddOption()"
+          >
+            <i class="bi bi-plus"></i>
+          </button>
+        </div>
+        <div class="options">
+          <ng-container formArrayName="options">
+            <ng-container
+              *ngFor="let option of options.controls; let i = index"
+            >
+              <div [formGroupName]="i" class="flex flexRow">
+                <div class="controlOption">
+                  <label>Label</label>
+                  <input
+                    placeholder="Enter Label"
+                    class="form-control"
+                    formControlName="label"
+                  />
+                  <div
+                    *ngIf="
+                      option.get('label')?.invalid &&
+                      (option.get('label')?.dirty ||
+                        option.get('label')?.touched)
+                    "
+                    class="error"
+                  >
+                    <div *ngIf="option.get('label')?.errors?.['required']">
+                      This field is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="controlOption ml-10">
+                  <label>Value</label>
+                  <input
+                    placeholder="Enter Value"
+                    class="form-control"
+                    formControlName="value"
+                  />
+                  <div
+                    *ngIf="
+                      option.get('value')?.invalid &&
+                      (option.get('value')?.dirty ||
+                        option.get('value')?.touched)
+                    "
+                    class="error"
+                  >
+                    <div *ngIf="option.get('value')?.errors?.['required']">
+                      This field is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="deleteOptionCt ml-10">
+                  <label style="visibility: hidden">Delete</label>
+                  <button
+                    title="Delete"
+                    class="btn delete"
+                    type="button"
+                    (click)="onOptionDelete(i)"
+                  >
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </div>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #nonEdit>
+  <div class="nonEdit"></div>
+</ng-template>
