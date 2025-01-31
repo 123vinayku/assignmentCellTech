@@ -1,0 +1,25 @@
+@import "../../theme/variable.scss";
+@import "../../theme/flexBox.scss";
+
+h2 {
+  font-family: $fontFamily;
+}
+
+p {
+  font-family: $fontFamily;
+}
+
+li {
+  font-family: $fontFamily;
+}
+
+button {
+  width: 200px;
+  border: 0px;
+  height: 35px;
+  border-radius: 4px;
+  font-size: 16;
+  font-family: $fontFamily;
+  color: $white;
+  background-color: $primary;
+}

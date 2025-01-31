@@ -1,0 +1,27 @@
+.flex {
+  display: flex;
+}
+
+.flexRow {
+  flex-direction: row;
+}
+
+.flexColumn {
+  flex-direction: column;
+}
+
+.alignItemCenter {
+  align-items: center;
+}
+
+.justifyContentCenter {
+  justify-content: center;
+}
+
+.alignSelfCenter {
+  align-self: center;
+}
+
+.justifyContentBetween {
+  justify-content: space-between;
+}

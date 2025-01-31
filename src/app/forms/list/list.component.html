@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="header flex flexRow justifyContentBetween">
+    <h4>Forms List</h4>
+    <button title="Create" class="btn create">
+      <i class="bi bi-plus"></i>
+      Create
+    </button>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Form Name</th>
+        <th scope="col">Field Count</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let form of forms">
+        <th scope="row">{{ form.id }}</th>
+        <td>
+          {{ form.name }}
+        </td>
+        <td>{{ form.fieldsCount }}</td>
+        <td>
+          <button title="Delete" class="btn delete" (click)="onDelete()">
+            <i class="bi bi-trash"></i>
+          </button>
+          <button title="Edit" class="btn edit">
+            <i class="bi bi-pencil-square"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
