@@ -14,7 +14,7 @@ import {
   IFormFieldOptions,
   IFormFieldRequired,
 } from '../types';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-checkbox',
@@ -39,15 +39,33 @@ export class CheckboxComponent implements OnInit, OnChanges {
   constructor(public formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    console.log(this.control, 'control');
+    this.initializeOptions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.disableInput();
   }
 
+  initializeOptions() {
+    if (this.control && this.mode !== this.formsModeEnum.VIEW) {
+      this.field.options.forEach((e: IFormFieldOptions) => {
+        this.control.push(
+          this.formBuilder.group({
+            label: [e.label],
+            value: [e.value],
+            checked: [false],
+          })
+        );
+      });
+    }
+  }
+
   disableInput() {
-    if (this.mode === this.formsModeEnum.PREVIEW && this.control) {
+    if (
+      (this.mode === this.formsModeEnum.PREVIEW ||
+        this.mode === this.formsModeEnum.VIEW) &&
+      this.control
+    ) {
       this.control.disable();
     }
   }
@@ -65,17 +83,9 @@ export class CheckboxComponent implements OnInit, OnChanges {
     this.options.removeAt(index);
   }
 
-  onCheckboxChange(event: any) {
-    const selectedValues = this.control as FormArray;
-    if (event.target.checked) {
-      selectedValues.push(this.formBuilder.control(event.target.value)); // Add value if checked
-    } else {
-      const index = selectedValues.controls.findIndex(
-        (ctrl) => ctrl.value === event.target.value
-      );
-      if (index !== -1) {
-        selectedValues.removeAt(index); // Remove value if unchecked
-      }
-    }
+  onCheckboxChange(event: any, i: number) {
+    const formGroup = this.control.at(i) as FormGroup;
+    formGroup.get('checked')?.setValue(event.target.checked);
+    this.control.markAsTouched();
   }
 }

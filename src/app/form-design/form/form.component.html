@@ -16,7 +16,7 @@
     <ng-container [ngSwitch]="field.type">
       <ng-container *ngSwitchCase="fieldTypeEnum.TEXT">
         <app-text-input
-          [mode]="responseId ? formsModeEnum.PREVIEW : formsModeEnum.SUBMIT"
+          [mode]="responseId ? formsModeEnum.VIEW : formsModeEnum.SUBMIT"
           [field]="field"
           [editIndex]="i"
           [control]="webForm.get(field.key)"
@@ -24,7 +24,7 @@
       </ng-container>
       <ng-container *ngSwitchCase="fieldTypeEnum.RADIO">
         <app-radio
-          [mode]="responseId ? formsModeEnum.PREVIEW : formsModeEnum.SUBMIT"
+          [mode]="responseId ? formsModeEnum.VIEW : formsModeEnum.SUBMIT"
           [field]="field"
           [editIndex]="i"
           [control]="webForm.get(field.key)"
@@ -32,7 +32,7 @@
       </ng-container>
       <ng-container *ngSwitchCase="fieldTypeEnum.CHECKBOX">
         <app-checkbox
-          [mode]="responseId ? formsModeEnum.PREVIEW : formsModeEnum.SUBMIT"
+          [mode]="responseId ? formsModeEnum.VIEW : formsModeEnum.SUBMIT"
           [field]="field"
           [editIndex]="i"
           [control]="webForm.get(field.key)"

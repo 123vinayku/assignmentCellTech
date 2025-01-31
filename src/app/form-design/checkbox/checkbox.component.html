@@ -146,15 +146,17 @@
         >
       </label>
       <div class="options">
-        <ng-container *ngFor="let option of field.options; let i = index">
+        <ng-container *ngFor="let option of control.controls; let i = index">
           <label class="flex flexRow alignItemCenter">
             <input
               type="checkbox"
-              [value]="option.value"
-              [disabled]="mode === formsModeEnum.PREVIEW"
-              (change)="onCheckboxChange($event)"
+              [checked]="option.get('checked').value"
+              [disabled]="
+                mode === formsModeEnum.PREVIEW || mode === formsModeEnum.VIEW
+              "
+              (change)="onCheckboxChange($event, i)"
             />
-            <span class="ml-10">{{ option.label }}</span>
+            <span class="ml-10">{{ option.get("label").value }}</span>
           </label>
         </ng-container>
       </div>

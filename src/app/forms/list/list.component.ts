@@ -34,7 +34,6 @@ export class ListComponent implements OnInit {
     });
     modalRef.componentInstance.message = 'Do you want to delete this form ?';
     const result = await modalRef.result;
-    console.log(result);
     if (result === 'YES') {
       const forms = this.forms.filter((e: IForm) => e.id !== form.id);
       this.storageService.setData(FormStorageKeys.FORMS, JSON.stringify(forms));

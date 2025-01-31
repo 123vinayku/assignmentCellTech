@@ -5,6 +5,8 @@ import {
   FormArray,
   Validators,
   FormControl,
+  ValidatorFn,
+  AbstractControl,
 } from '@angular/forms';
 import {
   FormsModeEnum,
@@ -13,6 +15,7 @@ import {
   IForm,
   FormStorageKeys,
   IResponse,
+  IFormFieldOptions,
 } from '../types';
 import { Router, ActivatedRoute } from '@angular/router';
 import { StorageService } from '../../shared/services/storage.service';
@@ -80,7 +83,7 @@ export class FormComponent implements OnInit, OnDestroy {
           new FormArray(
             [],
             formJson[i].isRequired === this.formfieldRequiredEnum.YES
-              ? [Validators.required]
+              ? [this.minSelectedCheckboxes(1)]
               : []
           )
         );
@@ -89,11 +92,21 @@ export class FormComponent implements OnInit, OnDestroy {
           this.responseDetails.formValues[formJson[i].key]?.length
         ) {
           const control = this.webForm.get(formJson[i].key) as FormArray;
-          this.responseDetails.formValues[formJson[i].key].forEach(
-            (e: string) => {
-              control.push(this.formBuilder.control(e));
-            }
-          );
+          formJson[i].options.forEach((e: IFormFieldOptions) => {
+            control.push(
+              this.formBuilder.group({
+                label: [e.label],
+                value: [e.value],
+                checked: [
+                  this.responseDetails.formValues[formJson[i].key].indexOf(
+                    e.value
+                  ) > -1
+                    ? true
+                    : false,
+                ],
+              })
+            );
+          });
         }
       } else {
         this.webForm.addControl(
@@ -109,13 +122,33 @@ export class FormComponent implements OnInit, OnDestroy {
         );
       }
     }
-    console.log(this.webForm);
+  }
+
+  minSelectedCheckboxes(min: number): ValidatorFn {
+    return (control: AbstractControl) => {
+      if (control instanceof FormArray) {
+        const selectedCount = control.controls.filter(
+          (c) => c.value.checked
+        ).length;
+        return selectedCount >= min ? null : { required: true };
+      }
+      return null;
+    };
   }
 
   onSubmit() {
     if (this.webForm.invalid) {
       return;
     }
+    const values = JSON.parse(JSON.stringify(this.webForm.value));
+    for (let key in values) {
+      if (Array.isArray(values[key])) {
+        values[key] = values[key]
+          .filter((e: IFormFieldOptions) => e.checked)
+          .map((e: IFormFieldOptions) => e.value);
+      }
+    }
+
     let previousResponse =
       this.storageService.getData(FormStorageKeys.RESPONSES) || [];
 
@@ -124,7 +157,7 @@ export class FormComponent implements OnInit, OnDestroy {
         ...previousResponse,
         ...[
           {
-            formValues: { ...this.webForm.value },
+            formValues: { ...values },
             formId: this.formId,
             id: Math.floor(Math.random() * 1000),
             submittedAt: new Date().toISOString(),
@@ -134,7 +167,7 @@ export class FormComponent implements OnInit, OnDestroy {
     } else {
       previousResponse = [
         {
-          formValues: { ...this.webForm.value },
+          formValues: { ...values },
           formId: this.formId,
           id: Math.floor(Math.random() * 1000),
           submittedAt: new Date().toISOString(),

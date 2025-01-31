@@ -44,7 +44,11 @@ export class RadioComponent implements OnInit, OnChanges {
   }
 
   disableInput() {
-    if (this.mode === this.formsModeEnum.PREVIEW && this.control) {
+    if (
+      (this.mode === this.formsModeEnum.PREVIEW ||
+        this.mode === this.formsModeEnum.VIEW) &&
+      this.control
+    ) {
       this.control.disable();
     }
   }

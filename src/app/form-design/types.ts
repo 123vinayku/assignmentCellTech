@@ -21,6 +21,7 @@ export interface IFormFieldRequired {
 export interface IFormFieldOptions {
   label: string;
   value: string | boolean;
+  checked?: boolean;
 }
 
 export interface IFormField {
@@ -36,6 +37,7 @@ export enum FormsModeEnum {
   EDIT = 'edit',
   PREVIEW = 'preview',
   SUBMIT = 'submit',
+  VIEW = 'view',
 }
 
 export interface IForm {
