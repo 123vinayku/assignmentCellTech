@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationComponent } from 'src/app/shared/confirmation/confirmation.component';
 
@@ -14,7 +15,7 @@ export class ListComponent {
     { name: 'Mno', fieldsCount: 20, id: 3 },
   ];
 
-  constructor(public modalService: NgbModal) {}
+  constructor(public modalService: NgbModal, public router: Router) {}
 
   async onDelete() {
     const modalRef = this.modalService.open(ConfirmationComponent, {
@@ -24,5 +25,9 @@ export class ListComponent {
     modalRef.componentInstance.message = 'Do you want to delete this form ?';
     const result = await modalRef.result;
     console.log(result);
+  }
+
+  onCreate() {
+    this.router.navigate(['form-design']);
   }
 }

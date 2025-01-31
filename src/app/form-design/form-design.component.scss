@@ -1,0 +1,56 @@
+@import "../../theme/variable.scss";
+@import "../../theme/flexBox.scss";
+
+.formDesign {
+  padding: 0px 10px;
+  .header {
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid $lightGrey;
+    h4 {
+      font-family: $fontFamily;
+    }
+  }
+  .form-control {
+    font-size: 14px;
+  }
+  .btn {
+    font-size: 14px;
+  }
+  .error {
+    font-family: $fontFamily;
+    font-size: 12px;
+    color: $danger;
+    margin: 4px 0;
+  }
+
+  .designCt {
+    margin-top: 20px;
+    .design {
+      flex-basis: 50%;
+      .control {
+        flex: 0 1 40%;
+      }
+      .btnControl {
+        flex: 0 1 20%;
+        text-align: center;
+      }
+      .heading {
+        font-family: $fontFamily;
+        font-size: 16px;
+        margin: 5px 0;
+      }
+      label {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 3px;
+      }
+      .form-control {
+        font-size: 14px;
+      }
+      .btn {
+        font-size: 14px;
+      }
+    }
+  }
+}

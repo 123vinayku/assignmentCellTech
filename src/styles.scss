@@ -25,3 +25,17 @@ html {
 .textRight {
   text-align: right;
 }
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+label {
+  display: block;
+}
+
+label,
+.btn,
+.form-control {
+  font-family: $fontFamily;
+}

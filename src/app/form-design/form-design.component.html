@@ -1,0 +1,126 @@
+<div class="formDesign">
+  <div class="header">
+    <h4>Create Form</h4>
+  </div>
+  <div [formGroup]="form" class="formDetails flex flexRow">
+    <div>
+      <input
+        type="text"
+        placeholder="Enter Form Name"
+        class="form-control"
+        formControlName="name"
+      />
+      <div
+        *ngIf="
+          form.controls['name'].invalid &&
+          (form.controls['name'].dirty || form.controls['name'].touched)
+        "
+        class="error"
+      >
+        <div *ngIf="form.controls['name'].errors?.['required']">
+          This field is required.
+        </div>
+      </div>
+    </div>
+    <div class="ml-10">
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        title="Submit"
+        class="btn btn-primary"
+        (click)="onSubmit()"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+  <div class="designCt flex flexRow">
+    <div class="design">
+      <p class="heading">
+        Please select from below which fields you need in the form:
+      </p>
+      <div class="flex flexRow" [formGroup]="addFieldForm">
+        <div class="control">
+          <label>Field Type</label>
+          <select class="form-control" formControlName="type">
+            <option value="" selected>Select Field Type</option>
+            <option *ngFor="let field of formFields" value="{{ field.value }}">
+              {{ field.label }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              addFieldForm.controls['type'].invalid &&
+              (addFieldForm.controls['type'].dirty ||
+                addFieldForm.controls['type'].touched)
+            "
+            class="error"
+          >
+            <div *ngIf="addFieldForm.controls['type'].errors?.['required']">
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div class="control ml-10">
+          <label>Is Field Required?</label>
+          <select class="form-control" formControlName="isRequired">
+            <option value="" selected>Select Field Required</option>
+            <option
+              *ngFor="let fieldRequired of formFieldRequired"
+              value="{{ fieldRequired.value }}"
+            >
+              {{ fieldRequired.label }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              addFieldForm.controls['isRequired'].invalid &&
+              (addFieldForm.controls['isRequired'].dirty ||
+                addFieldForm.controls['isRequired'].touched)
+            "
+            class="error"
+          >
+            <div
+              *ngIf="addFieldForm.controls['isRequired'].errors?.['required']"
+            >
+              This field is required.
+            </div>
+          </div>
+        </div>
+        <div class="btnControl">
+          <label style="visibility: hidden">Add More</label>
+          <button
+            [disabled]="addFieldForm.invalid"
+            title="Add"
+            class="btn btn-primary"
+            type="submit"
+            (click)="onAddField()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+
+      <div [formGroup]="form">
+        <div formArrayName="fields">
+          <ng-container *ngFor="let field of fields.controls; let i = index">
+            <div [formGroupName]="i">
+              <ng-container [ngSwitch]="field.get('type')?.value">
+                <ng-container *ngSwitchCase="fieldTypeEnum.TEXT">
+                  Text
+                </ng-container>
+                <ng-container *ngSwitchCase="fieldTypeEnum.RADIO">
+                  Radio
+                </ng-container>
+                <ng-container *ngSwitchCase="fieldTypeEnum.CHECKBOX">
+                  Check
+                </ng-container>
+              </ng-container>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="preview"></div>
+  </div>
+</div>
