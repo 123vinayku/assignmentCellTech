@@ -82,7 +82,7 @@
               <ng-container [ngSwitch]="field.get('type')?.value">
                 <ng-container *ngSwitchCase="fieldTypeEnum.TEXT">
                   <app-text-input
-                    [editMode]="true"
+                    [mode]="formsModeEnum.EDIT"
                     [field]="field"
                     [editIndex]="i"
                     (onDelete)="onDeleteField($event)"
@@ -90,7 +90,7 @@
                 </ng-container>
                 <ng-container *ngSwitchCase="fieldTypeEnum.RADIO">
                   <app-radio
-                    [editMode]="true"
+                    [mode]="formsModeEnum.EDIT"
                     [field]="field"
                     [editIndex]="i"
                     (onDelete)="onDeleteField($event)"
@@ -98,7 +98,7 @@
                 </ng-container>
                 <ng-container *ngSwitchCase="fieldTypeEnum.CHECKBOX">
                   <app-checkbox
-                    [editMode]="true"
+                    [mode]="formsModeEnum.EDIT"
                     [field]="field"
                     [editIndex]="i"
                     (onDelete)="onDeleteField($event)"
@@ -110,6 +110,12 @@
         </ng-container>
       </div>
     </div>
-    <div class="preview"></div>
+    <div class="preview">
+      <h4>Preview Form</h4>
+      <app-preview
+        [mode]="formsModeEnum.PREVIEW"
+        [form]="form.value"
+      ></app-preview>
+    </div>
   </div>
 </div>

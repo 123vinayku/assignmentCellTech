@@ -49,6 +49,16 @@
 }
 
 .nonEdit {
+  width: 100%;
+  margin-bottom: 10px;
+  label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 3px;
+  }
+  .form-control {
+    font-size: 14px;
+  }
 }
 
 .error {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormFieldsTypeEnum, IFormFieldType } from './types';
+import { FormFieldsTypeEnum, FormsModeEnum, IFormFieldType } from './types';
 import { FormFieldTypes } from './constants';
 
 @Component({
@@ -14,6 +14,7 @@ export class FormDesignComponent implements OnInit {
   public addFieldForm!: FormGroup;
   public formFields: Array<IFormFieldType> = FormFieldTypes;
   public fieldTypeEnum = FormFieldsTypeEnum;
+  public formsModeEnum = FormsModeEnum;
 
   get fields(): FormArray {
     return this.form.get('fields') as FormArray;
@@ -46,6 +47,7 @@ export class FormDesignComponent implements OnInit {
       label: ['', Validators.required],
       placeholder: [''],
       options: this.formBuilder.array([]),
+      key: [`field_${this.fields.length + 1}`, Validators.required],
     });
   }
 

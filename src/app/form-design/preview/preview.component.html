@@ -1,0 +1,30 @@
+<div class="container" [formGroup]="formPreview">
+  <ng-container *ngFor="let field of form.fields; let i = index">
+    <ng-container [ngSwitch]="field.type">
+      <ng-container *ngSwitchCase="fieldTypeEnum.TEXT">
+        <app-text-input
+          [mode]="mode"
+          [field]="field"
+          [editIndex]="i"
+          [control]="formPreview.get(field.key)"
+        ></app-text-input>
+      </ng-container>
+      <ng-container *ngSwitchCase="fieldTypeEnum.RADIO">
+        <app-radio
+          [mode]="mode"
+          [field]="field"
+          [editIndex]="i"
+          [control]="formPreview.get(field.key)"
+        ></app-radio>
+      </ng-container>
+      <ng-container *ngSwitchCase="fieldTypeEnum.CHECKBOX">
+        <app-checkbox
+          [mode]="mode"
+          [field]="field"
+          [editIndex]="i"
+          [control]="formPreview.get(field.key)"
+        ></app-checkbox>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

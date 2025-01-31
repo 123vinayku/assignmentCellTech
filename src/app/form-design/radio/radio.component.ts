@@ -1,6 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormFieldRequired } from '../constants';
-import { IFormFieldRequired } from '../types';
+import {
+  FormFieldRequiredEnum,
+  FormsModeEnum,
+  IFormFieldRequired,
+} from '../types';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -8,10 +20,11 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './radio.component.html',
   styleUrls: ['./radio.component.scss'],
 })
-export class RadioComponent implements OnInit {
-  @Input() editMode: boolean = false;
+export class RadioComponent implements OnInit, OnChanges {
+  @Input() mode!: FormsModeEnum;
   @Input() field!: any;
   @Input() editIndex!: number;
+  @Input() control!: any;
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
 
   get options(): FormArray {
@@ -19,10 +32,22 @@ export class RadioComponent implements OnInit {
   }
 
   public formFieldRequired: Array<IFormFieldRequired> = FormFieldRequired;
+  public formsModeEnum = FormsModeEnum;
+  public formFieldRequiredEnum = FormFieldRequiredEnum;
 
   constructor(public formBuilder: FormBuilder) {}
 
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.disableInput();
+  }
+
+  disableInput() {
+    if (this.mode === this.formsModeEnum.PREVIEW && this.control) {
+      this.control.disable();
+    }
+  }
 
   onAddOption() {
     this.options.push(

@@ -1,4 +1,4 @@
-<ng-container *ngIf="editMode; else nonEdit">
+<ng-container *ngIf="mode === formsModeEnum.EDIT; else nonEdit">
   <div class="edit" [formGroup]="field">
     <div class="header flex flexRow justifyContentBetween">
       <div></div>
@@ -70,5 +70,25 @@
 </ng-container>
 
 <ng-template #nonEdit>
-  <div class="nonEdit"></div>
+  <div class="nonEdit">
+    <div class="">
+      <label>
+        {{ field.label }}
+        <ng-container *ngIf="field.isRequired === formFieldRequiredEnum.YES"
+          >*</ng-container
+        >
+      </label>
+      <input
+        class="form-control"
+        [formControl]="control"
+        placeholder="{{ field.placeholder }}"
+      />
+      <div
+        *ngIf="control?.invalid && (control?.dirty || control?.touched)"
+        class="error"
+      >
+        <div *ngIf="control?.errors?.['required']">This field is required.</div>
+      </div>
+    </div>
+  </div>
 </ng-template>

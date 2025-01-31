@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextInputComponent } from './text-input/text-input.component';
 import { RadioComponent } from './radio/radio.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import { PreviewComponent } from './preview/preview.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [FormDesignComponent, TextInputComponent, RadioComponent, CheckboxComponent],
+  declarations: [FormDesignComponent, TextInputComponent, RadioComponent, CheckboxComponent, PreviewComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),

@@ -5,8 +5,8 @@ export enum FormFieldsTypeEnum {
 }
 
 export enum FormFieldRequiredEnum {
-  NO = 0,
-  YES = 1,
+  NO = '0',
+  YES = '1',
 }
 
 export interface IFormFieldType {
@@ -29,4 +29,16 @@ export interface IFormField {
   options: Array<IFormFieldOptions>;
   label: string;
   placeholder: string;
+  key: string;
+}
+
+export enum FormsModeEnum {
+  EDIT = 'edit',
+  PREVIEW = 'preview',
+}
+
+export interface IForm {
+  id: number;
+  name: string;
+  fields: Array<IFormField>;
 }

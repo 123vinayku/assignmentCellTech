@@ -26,6 +26,16 @@
 
   .designCt {
     margin-top: 20px;
+    .preview {
+      flex-basis: 50%;
+      margin-top: 0px;
+      border-left: 1px solid $lightGrey;
+      margin-left: 10px;
+      h4 {
+        font-family: $fontFamily;
+        padding: 0 10px;
+      }
+    }
     .design {
       flex-basis: 50%;
       .control {
